@@ -2,6 +2,7 @@ import sys
 import this
 
 from random import choice
+import django
 
 from django.conf import settings
 from django.core.management import execute_from_command_line
