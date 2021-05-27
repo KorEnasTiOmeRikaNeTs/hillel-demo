@@ -2,7 +2,6 @@ import sys
 import this
 
 from random import choice
-import django
 
 from django.conf import settings
 from django.core.management import execute_from_command_line
@@ -11,11 +10,11 @@ from django.urls import path
 
 
 
-settings.configure(
-	ROOT_URLCONF=__name__,
-	DEBUG=True,
-	SECRET_KEY='qazwsx'
-)
+ROOT_URLCONF=__name__
+DEBUG=True
+SECRET_KEY='qazwsx'
+
+
 
 
 text = ''.join(this.d.get(c, c) for c in this.s)
