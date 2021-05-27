@@ -10,11 +10,10 @@ from django.urls import path
 
 
 
-settings.configure(
-	ROOT_URLCONF=__name__,
-	DEBUG=True,
-	SECRET_KEY='qazwsx'
-)
+
+ROOT_URLCONF=__name__
+DEBUG=True
+SECRET_KEY='qazwsx'
 
 
 
