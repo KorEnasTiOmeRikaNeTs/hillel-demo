@@ -1,5 +1,4 @@
 import sys
-import this
 
 from importlib import import_module
 from importlib.util import find_spec
@@ -44,19 +43,13 @@ def creating_links(module_name):
 		str_with_link = f'<a href = "doc/{module_name}/{module_doc[i]}">{module_doc[i]}</a>'
 		return str_with_link
 
-# text = ''.join(this.d.get(c, c) for c in this.s)
-# title, _, *quotes = text.splitlines()
+
 
 def fun_module_doc(request, module_name):
 	return render(request, "template_HW_2.html", {'module_ottrs': creating_links(module_name)})
 										  			
+		
 												
-				
-																							
-	# HttpResponse(template.format(title=title, quote=choice(quotes)))
-
-
-
 def fun_obj_doc(request, module_name, name):
 	return render(request, "template1_HW_2.html", {'ottrs_doc': module_name.name.__doc__})
 
@@ -65,7 +58,7 @@ urlpatterns = [
 	path("doc/<module_name>/<name>", fun_obj_doc)
 ]
 
-
+import this
 if __name__ == "__mane__":
 	execute_from_command_line(sys.argv)
 
