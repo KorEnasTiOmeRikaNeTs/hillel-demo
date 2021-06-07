@@ -39,7 +39,7 @@ def creating_links(module_name):
 			module_doc.append(atr)
 
     # creating links    	
-	for i in renge(0, len(module_doc) - 1):
+	for i in range(0, len(module_doc) - 1):
 		str_with_link = f'<a href = "doc/{module_name}/{module_doc[i]}">{module_doc[i]}</a>'
 		return str_with_link
 
@@ -49,7 +49,7 @@ def fun_module_doc(request, module_name):
 	return render(request, "template_HW_2.html", {'module_ottrs': creating_links(module_name)})
 										  			
 		
-												
+
 def fun_obj_doc(request, module_name, name):
 	return render(request, "template1_HW_2.html", {'ottrs_doc': module_name.name.__doc__})
 
@@ -59,6 +59,9 @@ urlpatterns = [
 ]
 
 import this
-if __name__ == "__mane__":
+if __name__ == "__main__":
 	execute_from_command_line(sys.argv)
+
+
+
 
