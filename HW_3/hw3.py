@@ -1,14 +1,12 @@
 import sys
 
 from random import choice
-from string import ascii_letters
-from string import digits
+from string import ascii_letters, digits
 
 from django.core.management import execute_from_command_line
 from django.http import HttpResponse
 from django.urls import path
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 
 ROOT_URLCONF=__name__
 DEBUG=True
