@@ -5,10 +5,15 @@
 </head>
 <body>
     <h1>{{ others }}</h1>
-    {{ something }}
     <form action="" method="POST">
+     {% if sss %}
+      <h1><a href = "{{something}}">{{something}}</a></h1>
       <input type="text" name="url">
       <input type="submit" value="Search">
+     {% else %}
+      <input type="text" name="url">
+      <input type="submit" value="Search">
+     {% endif %} 
     </form>
 </body>
 </html>

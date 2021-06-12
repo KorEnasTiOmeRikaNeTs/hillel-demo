@@ -8,8 +8,7 @@ from django.core.management import execute_from_command_line
 from django.http import HttpResponse
 from django.urls import path
 from django.shortcuts import render
-
-
+from django.shortcuts import redirect
 
 ROOT_URLCONF=__name__
 DEBUG=True
@@ -21,10 +20,6 @@ TEMPLATES = [
  	}
 ]
 
-
-# text = ''.join(this.d.get(c, c) for c in this.s)
-# title, _, *quotes = text.splitlines()
-
 dict_with_key_and_link = dict()
 
 def almost_all_the_work(request):
@@ -32,27 +27,21 @@ def almost_all_the_work(request):
 	list_with_key = []
 	if request.POST:
 		link = request.POST.get('url', '')
-		if link.startswith('http') or link.startswith('https') or link.startswith('ftp'):
+		if link.startswith(('http://', 'https://', 'ftp://')):
 			key = ''.join(choice(''.join([ascii_letters, digits])) for _ in range(5))
-			list_with_filter_link.append(link)
-			list_with_key.append(key)
-			dict_with_key_and_link = dict(zip(list_with_key, list_with_filter_link))
-			short_link = f'<h1><a href = "{key}">{key}</a><h1>'
-			return render(request, 'template_hw3.html', {'something': short_link})
+			dict_with_key_and_link[key] = link
+			return render(request, 'template_hw3.html', {'something': key,
+														 'sss': dict_with_key_and_link})
 		else:
-			return render(request, 'template_hw3.html', {'others': f'Invalid URL {link}. Allowed schemes: http,ftp,https'})
+			return render(request, 'template_hw3.html', {'others': f'Invalid URL {link}. Allowed schemes: http://,ftp://,https://'})
 	else:
 		return render(request, 'template_hw3.html', {})
 
-	# return render(request, 'template_hw3.html', {'title': 'Title',
-	#											 'template': TEMPLATES,
-	#											 'quote': "quotes"})
-
-def redirect_from_short_to_long(_):
-	pass
-
-
-	# return render(request, "template_hw3.html", {'quote': print("Hello_World")})
+def redirect_from_short_to_long(request, key):
+	if key in dict_with_key_and_link:
+		return redirect(dict_with_key_and_link[key])
+	else:
+		return redirect('/')
 
 urlpatterns = [
 	path("", almost_all_the_work),
