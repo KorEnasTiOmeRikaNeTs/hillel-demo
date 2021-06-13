@@ -23,8 +23,6 @@ TEMPLATES = [
 dict_with_key_and_link = dict()
 
 def almost_all_the_work(request):
-	list_with_filter_link = []
-	list_with_key = []
 	if request.POST:
 		link = request.POST.get('url', '')
 		if link.startswith(('http://', 'https://', 'ftp://')):
