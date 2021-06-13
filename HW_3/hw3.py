@@ -11,10 +11,11 @@ from django.shortcuts import render, redirect
 ROOT_URLCONF=__name__
 DEBUG=True
 SECRET_KEY='qazwsx'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TEMPLATES = [
  	{
  		'BACKEND': 'django.template.backends.django.DjangoTemplates',
- 		'DIRS': [''],
+ 		'DIRS': [BASE_DIR],
  	}
 ]
 
