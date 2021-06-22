@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>URL shortener</title>
+</head>
+<body>
+    <h1>{{ others }}</h1>
+    <form action="" method="POST">
+     {% if key %}
+      <h1><a href = "{{key}}">{{key}}</a></h1>
+      <input type="text" name="url">
+      <input type="submit" value="Search">
+     {% else %}
+      <input type="text" name="url">
+      <input type="submit" value="Search">
+     {% endif %} 
+    </form>
+</body>
+</html>
