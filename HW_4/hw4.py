@@ -41,17 +41,17 @@ def almost_all_the_work(request):
 		with connection.cursor() as cur:
 			cur.execute(query, [link])
 			key = cur.fetchone()
-			if key:
-				return render(request, 'template_hw4.html', {'key': key[0]})
+		if key:
+			return render(request, 'template_hw4.html', {'key': key[0]})
+		else:
+			if link.startswith(('http://', 'https://', 'ftp://')):
+				key = ''.join(choice(''.join([ascii_letters, digits])) for _ in range(5))
+				with connection.cursor() as cur:
+					insert = 'INSERT INTO hw4_table_with_key_and_link (key, link) VALUES (%s, %s)'
+					cur.execute(insert, [key, link])
+				return render(request, 'template_hw4.html', {'key': key})
 			else:
-				if link.startswith(('http://', 'https://', 'ftp://')):
-					key = ''.join(choice(''.join([ascii_letters, digits])) for _ in range(5))
-					with connection.cursor() as cur:
-						insert = 'INSERT INTO hw4_table_with_key_and_link (key, link) VALUES (%s, %s)'
-						cur.execute(insert, [key, link])
-					return render(request, 'template_hw4.html', {'key': key})
-				else:
-					return render(request, 'template_hw4.html', {'others': f'Invalid URL {link}. Allowed schemes: http://,ftp://,https://'})
+				return render(request, 'template_hw4.html', {'others': f'Invalid URL {link}. Allowed schemes: http://,ftp://,https://'})
 	else:
 		return render(request, 'template_hw4.html', {})
 
