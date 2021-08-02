@@ -4,10 +4,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django import forms
+# from django.db.models import Model
 from django.shortcuts import render, redirect
 from django.urls import reverse
-
-from hw_6_app.models import Url
+from .models import Url
 
 
 class UrlForm(forms.ModelForm):
@@ -29,11 +29,10 @@ def redirect_key(request, key):
         url = Url.objects.get(key=key)
         url.fanc_redirect_count()
         url = url.url
-    except Model.DoesNotExists:
+    except Exception:
         url = reverse('index')
     return redirect(to=url)
-
-
+	
 @login_required
 def index(request):
     ctx = {}

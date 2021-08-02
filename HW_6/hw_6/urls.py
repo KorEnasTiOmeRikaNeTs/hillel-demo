@@ -21,8 +21,9 @@ import hw_6_app.views as v
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', v.index, name='index'),
     path('register', v.create_user, name='register'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html', redirect_authenticated_user='/')),
+    path('', v.index, name='index'),
     path('<key>', v.redirect_key, name='redirect-key'),
-    path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html')),
 ]
+# redirect_authenticated_user='/'
