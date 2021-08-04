@@ -29,7 +29,7 @@ def redirect_key(request, key):
         url = Url.objects.get(key=key)
         url.fanc_redirect_count()
         url = url.url
-    except Exception:
+    except Url.DoesNotExist:
         url = reverse('index')
     return redirect(to=url)
 	
