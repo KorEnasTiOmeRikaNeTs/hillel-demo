@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('register', v.create_user, name='register'),
-    path('account/login/', auth_views.LoginView.as_view(template_name='login.html', redirect_authenticated_user='/')),
+    path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html', redirect_authenticated_user='/')),
     path('', v.index, name='index'),
     path('<key>', v.redirect_key, name='redirect-key'),
 ]
