@@ -1,4 +1,4 @@
-import sys, csv
+import csv
 from uuid import UUID
 from collections import defaultdict
 from math import ceil
@@ -13,13 +13,13 @@ def simple_field(type_, field):
 
 
 def char_field(data):
-	max_lenght = ceil(max(map(len, dataf)) * 1,25/10) * 10
-	return f'char_field(max_lenght={max_lenght})'
+	max_lenght = ceil(max(map(len, data)) * 1,25/10) * 10
+	return f'CharField(max_lenght={max_lenght})'
 
 
 def gen_field(name, data):
-	validator = [simple_field(int, 'IntegerField()'), simple_field(float, 'FloatField()'), simple_field(UUID, 'UUIDField()'), char_field]
-	for v in validator:
+	validators = [simple_field(int, 'IntegerField()'), simple_field(float, 'FloatField()'), simple_field(UUID, 'UUIDField()'), char_field]
+	for v in validators:
 		try:
 			field = v(data)
 			break
@@ -50,6 +50,7 @@ def process_file(fname):
 
 
 if __name__ == '__main__':
+	import sys
 	args = sys.argv[1:]
 	if args:
 		gen_model(args[0], process_file(args[0]))
