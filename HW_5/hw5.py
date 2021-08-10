@@ -13,7 +13,7 @@ def simple_field(type_, field):
 
 
 def char_field(data):
-	max_lenght = ceil(max(map(len, data)) * 1,25/10) * 10
+	max_lenght = ceil(max(map(len, data)) * 1.25/10) * 10
 	return f'CharField(max_lenght={max_lenght})'
 
 
@@ -40,7 +40,7 @@ def gen_model(fname, col_data):
 
 
 def process_file(fname):
-	with open(fname) as csvfile:
+	with open(fname, encoding='utf-8') as csvfile:
 		reader = csv.DictReader(csvfile)
 		col_data = defaultdict(set)
 		for row in reader:
