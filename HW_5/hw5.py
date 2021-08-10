@@ -13,7 +13,7 @@ def simple_field(type_, field):
 
 
 def char_field(data):
-	max_lenght = cail(max(map(len, dataf)) * 1,25/10) * 10
+	max_lenght = ceil(max(map(len, dataf)) * 1,25/10) * 10
 	return f'char_field(max_lenght={max_lenght})'
 
 
@@ -29,8 +29,8 @@ def gen_field(name, data):
 	try:
 		print(f'{indent}{name} = model.{field}')
 	except:
-		print('Yours .csv file cant be read correctly. Please try another file')
-		
+	 	print('Yours .csv file cant be read correctly. Please try another file')
+
 
 
 def gen_model(fname, col_data):
