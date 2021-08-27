@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Delete Post</h1>
+    {% if request.user==post.created_by %}
+      <form action="{%url 'delete'%}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Delete">
+      </form>
+    {% else %}
+    <h1>Sorry, but you try to delete someone else`s post</h1>
+    {% endif %}
+{% endblock content %}

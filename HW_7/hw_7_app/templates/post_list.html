@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
  
 {% block content %}
-  {% for post in object_list %}
+  {% for post in post_list %}
     <div class="post-entry">
-      <h2><a href="">{{ post.title }}</a></h2>
-      <p>{{ post.text }}</p>
+      {% if request.user == post.created_by %}
+      	<h2><a href="{%url 'detail' post.pk%}">{{ post.title }}</a></h2>
+      	<p>{{ post.text }}</p>
+      {% endif %}
     </div>
   {% endfor %}
 {% endblock content %}
