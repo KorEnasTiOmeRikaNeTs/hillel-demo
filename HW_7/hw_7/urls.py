@@ -17,17 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 import hw_7_app.views as v
-from hw_7_app.models import Post
-
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', v.create_user, name='register'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html', redirect_authenticated_user='post/'), name='login'),
     path('post/', v.PostList.as_view(), name='home'),
-	path('post/<int:pk>/', v.PostDetail.as_view(), name='detail'),
+    path('post/<int:pk>/', v.PostDetail.as_view(), name='detail'),
     path('post/create/', v.PostCreate.as_view(), name='create'),
-    path('post/update/<int:id>/', v.PostUpdate.as_view(), name='update'),
-#    path('/', v.PublicPostList.as_view(), name='public')
+    path('post/update/<int:pk>/', v.PostUpdate.as_view(), name='update'),
+    path('post/delete/<int:pk>/', v.PostDelete.as_view(), name='delete'),
+    path('', v.PublicPostList.as_view(), name='public')
 ]

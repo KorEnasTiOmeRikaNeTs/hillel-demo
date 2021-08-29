@@ -11,17 +11,14 @@ class Post(models.Model):
 	slug = models.SlugField(max_length=100, unique=True)
 	created_at = models.DateTimeField(auto_now=True)
 
-	
 	def get_absolute_url(self):
 		return reverse('home')
-
 
 	def __str__(self):
 		return self.title
 
-
 	def save(self, *args, **kwargs):
-		if not self.slug:
+		if not self.pk:
 			self.slug = slugify(self.title)
 		super().save(*args, **kwargs)
 

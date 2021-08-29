@@ -1,9 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponseNotFound
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django import forms
 from django.shortcuts import render, redirect
 from .models import Post
 
@@ -11,6 +10,11 @@ from .models import Post
 class PublicPostList(ListView):
     model = Post
     template_name = 'Public.html'
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['posts'] = Post.objects.order_by('-created_at')
+        return context
 
 
 class PostList(LoginRequiredMixin, ListView):
@@ -37,13 +41,29 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
     template_name = 'post_update.html'
     fields = ('title', 'text',)
-    pk_url_kwarg = 'id'
+    pk_url_kwarg = 'pk'
 
     def get_object(self, **kwargs):
-        post = super().get_object(self, **kwargs)
+        post = super().get_object(**kwargs)
         if not post.created_by == self.request.user:
             raise PermissionDenied
         return post
+
+
+class PostDelete(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = 'post_delete.html'
+    pk_url_kwarg = 'pk'
+    success_url = reverse_lazy('home')
+
+    def get_object(self, **kwargs):
+        post = super().get_object(**kwargs)
+        if not post.created_by == self.request.user:
+            raise PermissionDenied
+        return post
+
+    def get_success_url(self):
+        return self.success_url
 
 
 def create_user(request):
